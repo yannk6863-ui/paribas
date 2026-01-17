@@ -1,0 +1,288 @@
+<!-- SECTION CARTES BANCAIRES -->
+<div class="cartes-container">
+  <h2>Mes cartes bancaires</h2>
+
+  <div class="cartes-grid">
+
+    <!-- CARTE ACTIVE -->
+    <div class="carte-bancaire">
+      <div class="carte-top">
+        <div class="puce"></div>
+        <div class="logo-banque">BNP PARIBAS</div>
+      </div>
+
+      <div class="numero-carte">**** **** **** 4528</div>
+
+      <div class="carte-bottom">
+        <div>
+          <div class="label">Titulaire</div>
+          <div class="nom-titulaire">JEAN FRANCOIS</div>
+        </div>
+        <div>
+          <div class="label">Expire fin</div>
+          <div class="expiration">12/27</div>
+        </div>
+      </div>
+
+      <div class="solde-carte">Solde : 1 000 800 000€</div>
+      <div class="reseau">Visa Premier</div>
+      <div class="statut actif">Carte active</div>
+    </div>
+
+    <!-- CARTE BLOQUÉE -->
+    <div class="carte-bancaire bloque">
+      <div class="carte-top">
+        <div class="puce"></div>
+        <div class="logo-banque">BNP PARIBAS</div>
+      </div>
+
+      <div class="numero-carte">**** **** **** 8934</div>
+
+      <div class="carte-bottom">
+        <div>
+          <div class="label">Titulaire</div>
+          <div class="nom-titulaire">JEAN FRANCOIS</div>
+        </div>
+        <div>
+          <div class="label">Expire fin</div>
+          <div class="expiration">06/25</div>
+        </div>
+      </div>
+
+      <div class="solde-carte">Solde : 0,00 €</div>
+      <div class="reseau">Mastercard</div>
+      <div class="statut bloque">Carte bloquée</div>
+    </div>
+
+  </div>
+
+  <button class="btn-gerer">Gérer mes cartes</button>
+</div>
+
+<style>
+/* ===== CARTES BANCAIRES ===== */
+.cartes-container{
+  background:#fff;
+  border-radius:12px;
+  padding:25px;
+  max-width:900px;
+  margin:40px auto;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+  font-family:Roboto,sans-serif;
+}
+
+.cartes-container h2{
+  color:#166534;
+  font-size:20px;
+  margin-bottom:25px;
+  border-bottom:2px solid #e5e7eb;
+  padding-bottom:10px;
+}
+
+/* GRID */
+.cartes-grid{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+/* CARTE */
+.carte-bancaire{
+  position:relative;
+  width:360px;
+  height:215px;
+  border-radius:18px;
+  padding:20px;
+  color:#fff;
+  background:linear-gradient(135deg,#1F883E,#166534);
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.carte-bancaire.bloque{
+  background:linear-gradient(135deg,#6b7280,#374151);
+  filter:grayscale(70%);
+}
+
+/* TOP */
+.carte-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.puce{
+  width:42px;
+  height:32px;
+  background:linear-gradient(135deg,#facc15,#ca8a04);
+  border-radius:6px;
+}
+
+.logo-banque{
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
+/* NUMÉRO */
+.numero-carte{
+  font-size:20px;
+  letter-spacing:3px;
+  margin:28px 0 20px;
+}
+
+/* BOTTOM */
+.carte-bottom{
+  display:flex;
+  justify-content:space-between;
+}
+
+.label{
+  font-size:10px;
+  opacity:.8;
+}
+
+.nom-titulaire,
+.expiration{
+  font-size:13px;
+  font-weight:500;
+}
+
+/* SOLDE */
+.solde-carte{
+  margin-top:18px;
+  font-weight:600;
+  font-size:14px;
+}
+
+/* RÉSEAU */
+.reseau{
+  position:absolute;
+  bottom:20px;
+  right:20px;
+  font-weight:600;
+  font-size:13px;
+}
+
+/* STATUT */
+.statut{
+  position:absolute;
+  top:18px;
+  left:20px;
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:20px;
+  font-weight:600;
+}
+
+.statut.actif{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.statut.bloque{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+/* BOUTON */
+.btn-gerer{
+  display:block;
+  margin:30px auto 0;
+  background:#1F883E;
+  color:#fff;
+  border:none;
+  padding:14px 28px;
+  border-radius:30px;
+  font-size:14px;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.25);
+}
+.btn-gerer:hover{
+  background:#166534;
+}
+
+/* RESPONSIVE DESIGN - TABLETTE ET MOBILE */
+@media(max-width:1024px){
+  .cartes-container{
+    margin:30px auto;
+    padding:20px;
+  }
+  .cartes-container h2{font-size:18px;margin-bottom:20px}
+  .cartes-grid{gap:20px}
+  .carte-bancaire{
+    width:340px;
+    height:200px;
+    padding:18px;
+  }
+  .puce{width:38px;height:28px}
+  .numero-carte{font-size:18px;margin:24px 0 18px}
+  .btn-gerer{padding:12px 24px}
+}
+
+@media(max-width:768px){
+  .cartes-container{
+    margin:25px 15px;
+    padding:18px;
+    max-width:100%;
+  }
+  .cartes-container h2{font-size:16px}
+  .cartes-grid{gap:15px;flex-direction:column;align-items:center}
+  .carte-bancaire{
+    width:100%;
+    max-width:340px;
+    height:190px;
+    padding:16px;
+  }
+  .carte-top{margin-bottom:10px}
+  .puce{width:35px;height:26px}
+  .numero-carte{font-size:16px;letter-spacing:2px;margin:20px 0 15px}
+  .carte-bottom{font-size:12px}
+  .label{font-size:9px}
+  .nom-titulaire,.expiration{font-size:12px}
+  .solde-carte{font-size:13px;margin-top:15px}
+  .reseau{font-size:12px}
+  .statut{font-size:10px}
+  .btn-gerer{width:100%;margin:25px auto 0;padding:12px 20px;font-size:13px}
+}
+
+@media(max-width:480px){
+  .cartes-container{
+    margin:20px 10px;
+    padding:14px;
+    border-radius:8px;
+  }
+  .cartes-container h2{
+    font-size:14px;
+    margin-bottom:15px;
+    padding-bottom:8px;
+  }
+  .cartes-grid{gap:12px}
+  .carte-bancaire{
+    width:100%;
+    height:170px;
+    padding:14px;
+    border-radius:14px;
+  }
+  .carte-top{margin-bottom:8px}
+  .puce{width:32px;height:24px;border-radius:4px}
+  .logo-banque{font-size:12px}
+  .numero-carte{
+    font-size:14px;
+    letter-spacing:2px;
+    margin:16px 0 12px;
+  }
+  .carte-bottom{gap:20px}
+  .label{font-size:8px}
+  .nom-titulaire,.expiration{font-size:11px}
+  .solde-carte{font-size:12px;margin-top:10px}
+  .reseau{font-size:11px;bottom:14px;right:14px}
+  .statut{font-size:9px;top:14px;left:14px}
+  .btn-gerer{
+    width:calc(100% - 20px);
+    margin:20px auto 0;
+    padding:11px 16px;
+    font-size:12px;
+    border-radius:25px;
+  }
+}
